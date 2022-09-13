@@ -46,7 +46,7 @@ const Navbar = () => {
                 position: "fixed",
                 top: "0",
                 zIndex: "10",
-                display: { xs: "inherit", lg: "none" },
+                display: { xs: "inherit", lg: "flex" },
             }}
         >
             <AppBar position="static">
@@ -145,35 +145,34 @@ const Navbar = () => {
                             }}
                         >
                             <Box sx={{ display: "flex", alignItems: "center" }}>
-                                {false &&
-                                    pages.map((page, index) => (
-                                        <Typography
-                                            className="nav-link"
-                                            key={index}
-                                            onClick={() => {
-                                                navigateToTop();
-                                            }}
-                                            //separate styling because can't get NavLink working with hover
-                                            sx={{
-                                                margin: "0 1em",
-                                                "&:hover": {
-                                                    color: lightTheme.palette
-                                                        .custom.dark,
-                                                },
-                                            }}
+                                {pages.map((page, index) => (
+                                    <Typography
+                                        className="nav-link"
+                                        key={index}
+                                        onClick={() => {
+                                            navigateToTop();
+                                        }}
+                                        //separate styling because can't get NavLink working with hover
+                                        sx={{
+                                            margin: "0 1em",
+                                            "&:hover": {
+                                                color: lightTheme.palette.custom
+                                                    .dark,
+                                            },
+                                        }}
+                                    >
+                                        <Link
+                                            href={page.href}
+                                            style={({ isActive }) =>
+                                                isActive
+                                                    ? activeStyle
+                                                    : inactiveStyle
+                                            }
                                         >
-                                            <Link
-                                                href={page.href}
-                                                style={({ isActive }) =>
-                                                    isActive
-                                                        ? activeStyle
-                                                        : inactiveStyle
-                                                }
-                                            >
-                                                {page.name}
-                                            </Link>
-                                        </Typography>
-                                    ))}
+                                            {page.name}
+                                        </Link>
+                                    </Typography>
+                                ))}
                             </Box>
                             <Box sx={{ display: "flex", gap: "1em" }}>
                                 <SocialMediaIcons
